@@ -62,7 +62,7 @@ omarchy plugin enable io.github.ngek202.tablet-toggle --section right
 ## Notes
 
 - `SUPER+B` / SAM OSK dispatch is untouched — the button is never the
-  sole tablet exit (the 4-finger edge swipe stays).
+  sole tablet exit (the 3-finger left/right edge swipes stay).
 - A popup health menu was tried and closed as not-viable (popup input was
   unavailable in this shell/input path; right-click direct launch is used).
 - Touch long-press menu was tried and closed as not-viable (inner
