@@ -19,8 +19,8 @@ pretends to work.
 
 ## Requires
 
-The **tablet-kbd package** (engine, layouts, tablet wiring, verify script).
-Install it first:
+The **tablet-kbd package** (SAM OSK engine, layouts, tablet wiring, verify
+script). Install it first:
 
 ```bash
 git clone https://github.com/ngek202/tablet-kbd.git && ./tablet-kbd/install.sh
@@ -44,17 +44,25 @@ omarchy plugin enable io.github.ngek202.tablet-toggle --section right
 - `manifest.json` — plugin manifest (`bar-widget` kind)
 - `BarWidget.qml` — toggle + state polling (`tablet-mode.sh status`, 2s)
 
-## Behavior
+## Usage
 
-- **Left-click** — toggles tablet mode (highlighted when active).
-- **Right-click** — launches `tablet-verify-interactive.sh` in a floating
-  terminal: runs the read-only check, then prompts for `--fix` only if
-  problems are found.
+- **Left-click** — toggles tablet mode (highlighted when active). Entering
+  tablet mode turns the internal keyboard and touchpad off, enables
+  auto-rotate and the touch cursor, and puts **SAM OSK** one swipe away
+  (up from the bottom edge, or 3-finger up anywhere).
+- **Right-click** — launches the health check in a floating terminal:
+  read-only `tablet-verify.sh` runs first, and a
+  **`Press R to repair`** prompt appears **only if problems are found**.
+  `R` runs mechanical `--fix` repairs and re-checks; any other key exits
+  with no changes.
+- **Missing package?** No silent toggle — the widget dims, the tooltip
+  explains, and right-click still runs the health check to show exactly
+  what is absent.
 
 ## Notes
 
-- `SUPER+B` / OSK dispatch is untouched — the button is never the sole
-  tablet exit (the 4-finger edge swipe stays).
+- `SUPER+B` / SAM OSK dispatch is untouched — the button is never the
+  sole tablet exit (the 4-finger edge swipe stays).
 - A popup health menu was tried and closed as not-viable (popup input was
   unavailable in this shell/input path; right-click direct launch is used).
 - Touch long-press menu was tried and closed as not-viable (inner

@@ -4,7 +4,7 @@
   "name": "Tablet Toggle",
   "version": "0.1.0",
   "author": "ngek202",
-  "description": "Tablet-mode toggle for convertible (Dynabook Portege X30W-J). Shows tablet state, click to enter/exit. Companion to the tablet-kbd package; never the reverse.",
+  "description": "Tablet-mode toggle bar-widget for convertible laptops. Shows tablet state, click to enter/exit, right-click for health check/repair. Companion to the tablet-kbd package; never the reverse.",
   "kinds": ["bar-widget"],
   "entryPoints": {
     "barWidget": "BarWidget.qml"
