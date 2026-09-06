@@ -19,6 +19,8 @@ BarWidget {
   // tabletPresent gates the toggle; oskPresent only informs.
   property bool tabletPresent: true
   property bool oskPresent: true
+  // Transition tracking for one-shot notifications (never per-poll).
+  property bool prevPresent: true
 
   function statusScript() {
     return "$HOME/.config/hypr/scripts/tablet-mode.sh status"
@@ -35,10 +37,10 @@ BarWidget {
 
   function toggle() {
     if (!root.bar) return
-    // Guarded tap (v0.2): no tablet stack, no toggle attempt — open the
-    // health check instead. Never a silent detached failure.
+    // Guarded tap (v0.2.1): no tablet stack, no toggle attempt — run the
+    // package installer instead. Never a silent detached failure.
     if (!root.tabletPresent) {
-      root.checkHealth()
+      root.installPackage()
       return
     }
     // Optimistic flip for snappy touch feedback; the poll corrects it.
@@ -51,8 +53,40 @@ BarWidget {
     Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation $HOME/.config/hypr/scripts/tablet-verify-interactive.sh"])
   }
 
+  function installPackage() {
+    // v0.2.1: context-aware install. Fresh clone to /tmp (a broken
+    // partial tree can't block repair), pinned to a known-good commit
+    // (marketplace security baseline: remote git execution requires an
+    // exact SHA + detached checkout before executing), then the
+    // package's idempotent installer — visible in a floating terminal,
+    // explicit user click. The plugin owns nothing; git is guaranteed
+    // (Omarchy dependency).
+    // QUOTE TRAP (found live 2026-09-06): execDetached wraps the string
+    // in `bash -lc`, so any `&&` after the launcher would chain at the
+    // OUTER level and never run (`exec` replaces shell) — the whole
+    // install command must ride as ONE quoted launcher argument.
+    var cmd = "rm -rf /tmp/tablet-kbd-install && git clone https://github.com/ngek202/tablet-kbd.git /tmp/tablet-kbd-install && git -C /tmp/tablet-kbd-install checkout 7b59929f818c281269c4777aca8528454ad56c98 && /tmp/tablet-kbd-install/install.sh"
+    Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation '" + cmd + "'"])
+  }
+
+  function notifyUser(msg) {
+    Quickshell.execDetached(["bash", "-lc", "omarchy-notification-send -u low \"" + msg + "\" 2>/dev/null || notify-send \"" + msg + "\""])
+  }
+
+  // One-shot transition notifications: fire on PRESENCE CHANGES only,
+  // never per poll (2s poll recomputes from disk; installs are always
+  // click-gated — detection drives display only, so hit/miss blips are
+  // cosmetic and self-correct within one poll).
+  onTabletPresentChanged: {
+    if (root.tabletPresent !== root.prevPresent) {
+      if (root.tabletPresent) root.notifyUser("SAM OSK: tablet package ready")
+      else root.notifyUser("SAM OSK: tablet package missing — click the widget to install")
+      root.prevPresent = root.tabletPresent
+    }
+  }
+
   function tooltipText() {
-    if (!root.tabletPresent) return "Tablet package not installed — right-click for health check"
+    if (!root.tabletPresent) return "Tablet package not installed — click to install"
     if (!root.oskPresent) return root.tabletOn ? "Tablet mode on (OSK missing — right-click to check)" : "Tablet mode off (OSK missing — right-click to check)"
     if (!root.available) return "Tablet Toggle (tablet-mode.sh not found — install package)"
     return root.tabletOn ? "Tablet mode on — click to exit" : "Tablet mode off — click to enter"
@@ -132,10 +166,12 @@ BarWidget {
     // notification → terminal path.
     onPressed: function(b) {
       if (b === Qt.RightButton) {
-        root.checkHealth()
+        if (!root.tabletPresent) root.installPackage()
+        else root.checkHealth()
         return
       }
-      root.toggle()
+      if (!root.tabletPresent) root.installPackage()
+      else root.toggle()
     }
   }
 }

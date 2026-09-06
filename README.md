@@ -20,10 +20,14 @@ pretends to work.
 ## Requires
 
 The **tablet-kbd package** (SAM OSK engine, layouts, tablet wiring, verify
-script). Install it first:
+script). Install it first — pinned to a known-good commit for a
+reproducible install:
 
 ```bash
-git clone https://github.com/ngek202/tablet-kbd.git && ./tablet-kbd/install.sh
+git clone https://github.com/ngek202/tablet-kbd.git && \
+  cd tablet-kbd && \
+  git checkout 7b59929f818c281269c4777aca8528454ad56c98 && \
+  ./install.sh
 ```
 
 ## Install
