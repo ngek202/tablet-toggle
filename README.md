@@ -39,6 +39,16 @@ Non-interactive:
 omarchy plugin enable io.github.ngek202.tablet-toggle --section right
 ```
 
+## Removal
+
+```bash
+omarchy plugin remove io.github.ngek202.tablet-toggle
+```
+
+The widget is self-contained — removing it leaves the tablet-kbd
+package untouched: tablet mode keeps working via `SUPER+SHIFT+T`, and
+SAM OSK via `SUPER+B`.
+
 ## Files
 
 - `manifest.json` — plugin manifest (`bar-widget` kind)
