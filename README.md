@@ -13,9 +13,14 @@ toggles tablet mode; right-click opens a health menu (check / repair via
 
 The **tablet-kbd package** (engine, layouts, tablet wiring, verify script).
 Without it the widget dims and says so — it never pretends to work.
+Tap with pieces missing: no silent toggle, the menu offers Install rows
+that run the package installer visibly.
 
-> Installer in progress (Phase 4 of tablet-kbd). Until then, the package
-> installs from https://github.com/ngek202/tablet-kbd manually.
+Install the package with:
+
+```bash
+git clone https://github.com/ngek202/tablet-kbd.git && ./tablet-kbd/install.sh
+```
 
 ## Install
 
