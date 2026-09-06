@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.ngek202.tablet-toggle",
   "name": "Tablet Toggle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "ngek202",
   "description": "Tablet-mode toggle bar-widget for convertible laptops. Shows tablet state, click to enter/exit, right-click for health check/repair. Companion to the tablet-kbd package; never the reverse.",
   "kinds": ["bar-widget"],

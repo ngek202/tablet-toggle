@@ -6,7 +6,7 @@ Tablet-mode toggle bar-widget for Omarchy — the optional companion to the
 [tablet-kbd](https://github.com/ngek202/tablet-kbd) package.
 
 - **License:** GPL-3.0 (see `LICENSE`)
-- **Version:** 0.1.0
+- **Version:** 0.2.0 (guarded tap + right-click interactive check/repair)
 
 ## What it is
 
