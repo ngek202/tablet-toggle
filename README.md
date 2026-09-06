@@ -6,15 +6,14 @@ Tablet-mode toggle bar-widget for Omarchy — the optional companion to the
 ## What it is
 
 A bar-widget (right-side system area) showing tablet-mode state. Left-click
-toggles tablet mode; right-click opens a health menu (check / repair via
-`tablet-verify.sh`).
+toggles tablet mode; right-click launches the visible read-only health check.
 
 ## Requires
 
 The **tablet-kbd package** (engine, layouts, tablet wiring, verify script).
 Without it the widget dims and says so — it never pretends to work.
-Tap with pieces missing: no silent toggle, the menu offers Install rows
-that run the package installer visibly.
+Tap with pieces missing: no silent toggle; the health check explains what
+is missing.
 
 Install the package with:
 
@@ -39,12 +38,14 @@ omarchy plugin enable io.github.ngek202.tablet-toggle --section right
 
 - `manifest.json` — plugin manifest (`bar-widget` kind)
 - `BarWidget.qml` — toggle + state polling (`tablet-mode.sh status`, 2s)
-- `HealthMenu.qml` — right-click menu (check / repair in floating terminal)
+- Right-click — launches `tablet-verify.sh` in a floating terminal
 
 ## Notes
 
 - `SUPER+B` / OSK dispatch is untouched — the button is never the sole
   tablet exit (4-finger edge swipe stays).
+- A popup health menu was tried and closed as not-viable (popup input was
+  unavailable in this shell/input path; right-click direct launch is used).
 - Touch long-press menu was tried and closed as not-viable (inner
   MouseArea grabs unstealable + finger drift on a small slot).
 - Validates clean: `omarchy plugin validate .` exits 0.
