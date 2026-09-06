@@ -6,7 +6,8 @@ Tablet-mode toggle bar-widget for Omarchy — the optional companion to the
 ## What it is
 
 A bar-widget (right-side system area) showing tablet-mode state. Left-click
-toggles tablet mode; right-click launches the visible read-only health check.
+toggles tablet mode; right-click launches the visible health check, and
+offers repair only if problems are found.
 
 ## Requires
 
@@ -38,7 +39,9 @@ omarchy plugin enable io.github.ngek202.tablet-toggle --section right
 
 - `manifest.json` — plugin manifest (`bar-widget` kind)
 - `BarWidget.qml` — toggle + state polling (`tablet-mode.sh status`, 2s)
-- Right-click — launches `tablet-verify.sh` in a floating terminal
+- Right-click — launches `tablet-verify-interactive.sh` in a floating
+  terminal: runs the read-only check, and prompts for `--fix` only if
+  problems are found.
 
 ## Notes
 
