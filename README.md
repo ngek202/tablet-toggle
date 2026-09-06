@@ -56,8 +56,11 @@ omarchy plugin enable io.github.ngek202.tablet-toggle --section right
   `R` runs mechanical `--fix` repairs and re-checks; any other key exits
   with no changes.
 - **Missing package?** No silent toggle — the widget dims, the tooltip
-  explains, and right-click still runs the health check to show exactly
-  what is absent.
+  explains, and **either click runs the package installer** in a visible
+  floating terminal (fresh clone to `/tmp`, idempotent, ends
+  verify-green). A one-shot notification pings on the transition
+  (missing detected / package ready); the widget un-dims within one
+  2-second poll after the install completes.
 
 ## Notes
 
