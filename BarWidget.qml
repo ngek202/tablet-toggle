@@ -54,10 +54,11 @@ BarWidget {
   }
 
   function installPackage() {
-    // v0.2.1: context-aware install. Fresh clone to /tmp (a broken
-    // partial tree can't block repair), pinned to a known-good commit
-    // (marketplace security baseline: remote git execution requires an
-    // exact SHA + detached checkout before executing), then the
+    // v0.2.1: context-aware install. Fresh clone to a mktemp -d
+    // directory — unpredictable path, 0700, owned by the invoking user
+    // (marketplace review requirement: a predictable /tmp path fails
+    // symlink/ownership safety) — pinned to a known-good commit
+    // (full SHA + detached checkout before executing), then the
     // package's idempotent installer — visible in a floating terminal,
     // explicit user click. The plugin owns nothing; git is guaranteed
     // (Omarchy dependency).
@@ -65,7 +66,7 @@ BarWidget {
     // in `bash -lc`, so any `&&` after the launcher would chain at the
     // OUTER level and never run (`exec` replaces shell) — the whole
     // install command must ride as ONE quoted launcher argument.
-    var cmd = "rm -rf /tmp/tablet-kbd-install && git clone https://github.com/ngek202/tablet-kbd.git /tmp/tablet-kbd-install && git -C /tmp/tablet-kbd-install checkout 7b59929f818c281269c4777aca8528454ad56c98 && /tmp/tablet-kbd-install/install.sh"
+    var cmd = "d=$(mktemp -d) && git clone https://github.com/ngek202/tablet-kbd.git \"$d\" && git -C \"$d\" checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && \"$d/install.sh\""
     Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation '" + cmd + "'"])
   }
 

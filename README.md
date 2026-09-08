@@ -4,31 +4,30 @@
 
 ![Tablet Toggle active in the Omarchy bar](preview.png)
 
-Tablet-mode toggle bar-widget for Omarchy — the optional companion to the
-[tablet-kbd](https://github.com/ngek202/tablet-kbd) package.
+**For the moments your laptop becomes a tablet** — presenting, notes,
+reading, lounging. One-tap tablet mode for Omarchy convertible users:
+this bar-widget toggles it, shows its state, keeps itself healthy, and
+**installs its dependency for you** if it's missing.
 
 - **License:** GPL-3.0 (see `LICENSE`)
 - **Version:** 0.2.0 (guarded tap, context-aware install, right-click interactive check/repair)
 
-## What it is
+## What it does
 
-A bar-widget (right-side system area) showing tablet-mode state. Left-click
-toggles tablet mode; right-click runs a visible health check and offers a
-repair only if problems are found.
+- **Left-click** — toggles tablet mode on/off (highlighted when active)
+- **Right-click** — health check in a floating terminal; offers repair
+  only if something's broken
+- **Either, when the package is missing** — installs the tablet-kbd
+  package in a visible terminal
 
-The widget dims and explains when the package is missing — it never
-pretends to work.
-
-## Requires
-
-The **tablet-kbd package** (SAM OSK engine, layouts, tablet wiring, verify
-script). Install it first — pinned to a known-good commit for a
-reproducible install:
+Requires the [tablet-kbd](https://github.com/ngek202/tablet-kbd) package
+(SAM OSK engine, layouts, tablet wiring, verify script). Install it
+first — pinned to a known-good commit for a reproducible install:
 
 ```bash
 git clone https://github.com/ngek202/tablet-kbd.git && \
   cd tablet-kbd && \
-  git checkout 7b59929f818c281269c4777aca8528454ad56c98 && \
+  git checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && \
   ./install.sh
 ```
 
@@ -62,28 +61,17 @@ SAM OSK via `SUPER+B`.
 
 ## Usage
 
-- **Left-click** — toggles tablet mode (highlighted when active). Entering
-  tablet mode turns the internal keyboard and touchpad off, enables
-  auto-rotate and the touch cursor, and puts **SAM OSK** one swipe away
-  (up from the bottom edge, or 3-finger up anywhere).
-- **Right-click** — launches the health check in a floating terminal:
-  read-only `tablet-verify.sh` runs first, and a
-  **`Press R to repair`** prompt appears **only if problems are found**.
-  `R` runs mechanical `--fix` repairs and re-checks; any other key exits
-  with no changes.
-- **Missing package?** No silent toggle — the widget dims, the tooltip
-  explains, and **either click runs the package installer** in a visible
-  floating terminal (fresh clone to `/tmp`, idempotent, ends
-  verify-green). A one-shot notification pings on the transition
-  (missing detected / package ready); the widget un-dims within one
-  2-second poll after the install completes.
+| Click | What it does |
+|---|---|
+| **Left** | Toggle tablet mode on/off |
+| **Right** | Health check — offers repair only if something's broken |
+| **Either** *(package missing)* | Installs the tablet-kbd package in a visible terminal |
+
+The terminal walks you through everything — nothing to memorize.
 
 ## Notes
 
-- `SUPER+B` / SAM OSK dispatch is untouched — the button is never the
-  sole tablet exit (the 3-finger left/right edge swipes stay).
-- A popup health menu was tried and closed as not-viable (popup input was
-  unavailable in this shell/input path; right-click direct launch is used).
-- Touch long-press menu was tried and closed as not-viable (inner
-  MouseArea grabs unstealable + finger drift on a small slot).
-- Validates clean: `omarchy plugin validate .` exits 0.
+- **Never the sole exit:** tablet mode stays reachable without this
+  widget (`SUPER+SHIFT+T`, 3-finger edge swipes) and SAM OSK dispatch
+  (`SUPER+B`) is untouched — removing the widget removes nothing else.
+- **Schema-compliant:** passes `omarchy plugin validate`.
