@@ -25,10 +25,7 @@ Requires the [tablet-kbd](https://github.com/ngek202/tablet-kbd) package
 first — pinned to a known-good commit for a reproducible install:
 
 ```bash
-git clone https://github.com/ngek202/tablet-kbd.git && \
-  cd tablet-kbd && \
-  git checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && \
-  ./install.sh
+git clone https://github.com/ngek202/tablet-kbd.git && git -C tablet-kbd checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && ./tablet-kbd/install.sh
 ```
 
 ## Install
