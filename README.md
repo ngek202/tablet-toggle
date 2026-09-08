@@ -21,12 +21,10 @@ this bar-widget toggles it, shows its state, keeps itself healthy, and
   package in a visible terminal
 
 Requires the [tablet-kbd](https://github.com/ngek202/tablet-kbd) package
-(SAM OSK engine, layouts, tablet wiring, verify script). Install it
-first — pinned to a known-good commit for a reproducible install:
-
-```bash
-git clone https://github.com/ngek202/tablet-kbd.git && git -C tablet-kbd checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && ./tablet-kbd/install.sh
-```
+(SAM OSK engine, layouts, tablet wiring, verify script) — install it from
+its repository, **or simply install this plugin and click the dimmed
+widget**: it runs a pinned, visible install of the package for you
+(nothing to copy-paste).
 
 ## Install
 
