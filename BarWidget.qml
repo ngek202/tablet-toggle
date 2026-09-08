@@ -66,7 +66,7 @@ BarWidget {
     // in `bash -lc`, so any `&&` after the launcher would chain at the
     // OUTER level and never run (`exec` replaces shell) — the whole
     // install command must ride as ONE quoted launcher argument.
-    var cmd = "d=$(mktemp -d) && git clone https://github.com/ngek202/tablet-kbd.git \"$d\" && git -C \"$d\" checkout d8a77e7d9f80f0621538e0c363cec5b1faa06a8f && \"$d/install.sh\""
+    var cmd = "d=$(mktemp -d) && git clone https://github.com/ngek202/tablet-kbd.git \"$d\" && git -C \"$d\" checkout d5fbb6008caefc664d5b201e7f18a01bbf207a3e && \"$d/install.sh\""
     Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation '" + cmd + "'"])
   }
 
