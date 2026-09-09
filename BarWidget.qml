@@ -80,7 +80,7 @@ BarWidget {
   // cosmetic and self-correct within one poll).
   onTabletPresentChanged: {
     if (root.tabletPresent !== root.prevPresent) {
-      if (root.tabletPresent) root.notifyUser("SAM OSK: tablet package ready")
+      if (root.tabletPresent) root.notifyUser("SAM OSK ready — SUPER+B keyboard · SUPER+SHIFT+T tablet mode")
       else root.notifyUser("SAM OSK: tablet package missing — click the widget to install")
       root.prevPresent = root.tabletPresent
     }
