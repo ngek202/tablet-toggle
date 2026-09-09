@@ -15,6 +15,7 @@
     "displayName": "Tablet Toggle",
     "description": "Tablet mode on/off for convertible (taps tablet-mode.sh, polls its status)",
     "category": "Compositor",
-    "allowMultiple": false
+    "allowMultiple": false,
+    "defaultSection": "right"
   }
 }
