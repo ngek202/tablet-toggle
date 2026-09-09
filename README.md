@@ -1,6 +1,7 @@
 # tablet-toggle
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ngek202-yellow)](https://www.buymeacoffee.com/ngek202)
+[![Listed on the Omarchy Plugin Marketplace](https://img.shields.io/badge/Omarchy%20Marketplace-listed-blueviolet)](https://plugins.omarchy.org/)
 
 ![Tablet Toggle active in the Omarchy bar](preview.png)
 
