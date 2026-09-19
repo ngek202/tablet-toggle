@@ -11,7 +11,7 @@ this bar-widget toggles it, shows its state, keeps itself healthy, and
 **installs its dependency for you** if it's missing.
 
 - **License:** GPL-3.0 (see `LICENSE`)
-- **Version:** 0.2.0 (guarded tap, context-aware install, right-click interactive check/repair)
+- **Version:** 0.2.1 (disclosed companion installer, guarded tap, context-aware install, right-click interactive check/repair)
 
 ## What it does
 
@@ -54,6 +54,8 @@ SAM OSK via `SUPER+B`.
 
 - `manifest.json` — plugin manifest (`bar-widget` kind)
 - `BarWidget.qml` — toggle + state polling (`tablet-mode.sh status`, 2s)
+- `install-companion.sh` — pinned companion-package installer (the
+  `installer` / `remote-build` path declared to the marketplace baseline)
 
 ## Usage
 

@@ -54,20 +54,16 @@ BarWidget {
   }
 
   function installPackage() {
-    // v0.2.1: context-aware install. Fresh clone to a mktemp -d
-    // directory — unpredictable path, 0700, owned by the invoking user
-    // (marketplace review requirement: a predictable /tmp path fails
-    // symlink/ownership safety) — pinned to a known-good commit
-    // (full SHA + detached checkout before executing), then the
-    // package's idempotent installer — visible in a floating terminal,
-    // explicit user click. The plugin owns nothing; git is guaranteed
-    // (Omarchy dependency).
-    // QUOTE TRAP (found live 2026-09-06): execDetached wraps the string
-    // in `bash -lc`, so any `&&` after the launcher would chain at the
-    // OUTER level and never run (`exec` replaces shell) — the whole
-    // install command must ride as ONE quoted launcher argument.
-    var cmd = "d=$(mktemp -d) && git clone https://github.com/ngek202/tablet-kbd.git \"$d\" && git -C \"$d\" checkout a9a8a9caead8f5bf125427a551efe97feaef61d4 && \"$d/install.sh\""
-    Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation '" + cmd + "'"])
+    // v0.2.1: the pinned companion install lives in this plugin's own
+    // `install-companion.sh` (same directory). Keeping it as a separate,
+    // reviewable script — instead of a concatenated inline string — lets
+    // the marketplace's static security baseline see the pinned clone +
+    // install and report the expected `installer` / `remote-build` review
+    // capabilities (see the script's disclosure header). The clone target
+    // is an unpredictable, user-owned `mktemp -d` directory, the checkout
+    // is pinned to a full SHA with `--detach`, and the launcher stays
+    // user-initiated and visible in a floating terminal.
+    Quickshell.execDetached(["bash", "-lc", "exec omarchy-launch-floating-terminal-with-presentation \"$HOME/.config/omarchy/plugins/io.github.ngek202.tablet-toggle/install-companion.sh\""])
   }
 
   function notifyUser(msg) {
